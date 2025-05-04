@@ -4,46 +4,72 @@ public class Player_Controller : MonoBehaviour
 {
     public Animator animator;
 
+    public float speed;
+    private Rigidbody2D rb2d;
+    public float jump;
+
     private void Awake()
     {
         Debug.Log("Player_Controller Awake");
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        //SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        float speed = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("Speed", Mathf.Abs(speed));
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Jump");
+        bool isCrouching = Input.GetKey(KeyCode.LeftControl); // Detect crouch input
+        MoveCharacter(horizontal, vertical, isCrouching);
+        PlayMovementAnimation(horizontal, vertical, isCrouching);
+    }
+    private void MoveCharacter(float horizontal, float vertical, bool isCrouching)
+    {
+        // Move the character horizontally
+        Vector3 position = transform.position;
+        position.x += horizontal * speed * Time.deltaTime;
+        transform.position = position;
+
+        // Move the character vertically
+        if (vertical > 0)
+        {
+            rb2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
+        }
+
+        // Handle crouching (optional: reduce speed while crouching)
+        if (isCrouching)
+        {
+            speed *= 0.5f; // Reduce speed while crouching
+        }
+    }
+
+    private void PlayMovementAnimation(float horizontal, float vertical, bool isCrouching)
+    {
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
         Vector3 scale = transform.localScale;
-        if (speed < 0)
+        if (horizontal < 0)
         {
             scale.x = -1f * Mathf.Abs(scale.x);
         }
-        else if (speed > 0)
+        else if (horizontal > 0)
         {
             scale.x = Mathf.Abs(scale.x);
         }
         transform.localScale = scale;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Jump Animation
+        if (vertical > 0)
         {
-            Jump();
+            animator.SetBool("Jump", true);
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        else
         {
-            Crouch();
+            animator.SetBool("Jump", false);
         }
-    }
 
-    private void Jump()
-    {
-        animator.SetTrigger("Jump");
-        Debug.Log("Player jumped");
-    }
-
-    private void Crouch()
-    {
-        animator.SetTrigger("Crouch");
-        Debug.Log("Player crouched");
+        // Crouch Animation
+        animator.SetBool("Crouch", isCrouching);
     }
 }
+
