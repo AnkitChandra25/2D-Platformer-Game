@@ -19,7 +19,7 @@ public class Player_Controller : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Jump");
-        bool isCrouching = Input.GetKey(KeyCode.LeftControl); // Detect crouch input
+        bool isCrouching = Input.GetKey(KeyCode.LeftControl);
         MoveCharacter(horizontal, vertical, isCrouching);
         PlayMovementAnimation(horizontal, vertical, isCrouching);
     }
@@ -36,10 +36,10 @@ public class Player_Controller : MonoBehaviour
             rb2d.AddForce(new Vector2(0f, jump), ForceMode2D.Force);
         }
 
-        // Handle crouching (optional: reduce speed while crouching)
+       
         if (isCrouching)
         {
-            speed *= 0.5f; // Reduce speed while crouching
+            speed *= 0.5f;
         }
     }
 
