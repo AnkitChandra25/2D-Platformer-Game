@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
+    public ScoreController scoreController;
     public Animator animator;
 
     public float speed;
@@ -70,6 +72,12 @@ public class Player_Controller : MonoBehaviour
 
         // Crouch Animation
         animator.SetBool("Crouch", isCrouching);
+    }
+
+    public void PickupKey()
+    {
+        Debug.Log("You Picked Up the Key ! ");
+        scoreController.IncreseScore(10);
     }
 }
 
