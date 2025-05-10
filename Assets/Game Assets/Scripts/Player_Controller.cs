@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -78,6 +79,19 @@ public class Player_Controller : MonoBehaviour
     {
         Debug.Log("You Picked Up the Key ! ");
         scoreController.IncreseScore(10);
+    }
+
+    public void KillPlayer()
+    {
+        Debug.Log("You are Dead !");
+        //Destroy(gameObject);
+        ReloadLevel();
+    }
+
+    private void ReloadLevel()
+    {
+        Debug.Log("Reloading Level 0");
+        SceneManager.LoadScene(0);
     }
 }
 
