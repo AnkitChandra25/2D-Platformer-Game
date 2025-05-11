@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Player_Controller : MonoBehaviour
 {
     public ScoreController scoreController;
+    public GameOverController gameOverController;
     public Animator animator;
 
     public float speed;
@@ -85,13 +86,9 @@ public class Player_Controller : MonoBehaviour
     {
         Debug.Log("You are Dead !");
         //Destroy(gameObject);
-        ReloadLevel();
-    }
-
-    private void ReloadLevel()
-    {
-        Debug.Log("Reloading Level 0");
-        SceneManager.LoadScene(0);
+        //ReloadLevel();
+        gameOverController.PlayerDied();
+        this.enabled = false; // Disable the player controller script
     }
 }
 
