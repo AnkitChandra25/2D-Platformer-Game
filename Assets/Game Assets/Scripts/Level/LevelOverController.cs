@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelOverController : MonoBehaviour
 {
@@ -6,7 +7,9 @@ public class LevelOverController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Player_Controller>() != null)
         {
+            //Level is finished
             Debug.Log("Level Finished");
+            LevelManager.Instance.MarkCurrentLevelComplete();
         }
     }
 
