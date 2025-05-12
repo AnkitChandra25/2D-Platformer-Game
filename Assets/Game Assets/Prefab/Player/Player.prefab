@@ -200,9 +200,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreController: {fileID: 0}
+  gameOverController: {fileID: 0}
   animator: {fileID: 5170384380930569658}
   speed: 2
-  jump: 3
+  jump: 10
 --- !u!1 &7699041519387059083
 GameObject:
   m_ObjectHideFlags: 0

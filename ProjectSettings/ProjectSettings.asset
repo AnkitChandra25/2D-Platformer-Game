@@ -783,11 +783,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: d0f48d4f-1262-4092-9c8b-26c25aae57d9
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: 2D-Platformer-Game
+  organizationId: ankitchandra25sept
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
